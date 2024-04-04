@@ -24,39 +24,40 @@ public class HomePage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHomePageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        replaceFragment(new UserFragment());
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_activity_toolbar);
         toolbar.setTitle(getString(R.string.app_name));
         setSupportActionBar(toolbar);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_personas);
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            Fragment fragment = null;
 
-        List<Persona> Personas = new ArrayList<Persona>();
-        Personas.add(new Persona("Erick", "Villaseñor", "Jiménez", "UTL", R.drawable.erick));
-        Personas.add(new Persona("Alexis", "Ramos", "Alvarez", "Universidad Tecnológica", R.drawable.erick));
-        Personas.add(new Persona("Regino", "Gonzales", "Sanchez", "Instituto Politécnico", R.drawable.erick));
-        Personas.add(new Persona("Oscar", "Mancilla", "Gasca", "Universidad de Artes", R.drawable.erick));
-        Personas.add(new Persona("Birom", "Granados", "Conchas", "Colegio Nacional", R.drawable.erick));
-        Personas.add(new Persona("Sergio", "Martínez", "Jiménez", "Universidad Internacional", R.drawable.erick));
-        Personas.add(new Persona("Ana", "Blanco", "Nieto", "Escuela Superior de Ingeniería", R.drawable.erick));
-        Personas.add(new Persona("Fernando", "Vega", "Castaño", "Centro de Estudios Superiores", R.drawable.erick));
-        Personas.add(new Persona("Elena", "Molina", "Campos", "Instituto de Tecnología", R.drawable.erick));
-        Personas.add(new Persona("Oscar", "López", "Herrera", "Universidad de Ciencias", R.drawable.erick));
-        Personas.add(new Persona("Teresa", "Ramírez", "García", "Facultad de Derecho", R.drawable.erick));
+            if (itemId == R.id.user) {
+                fragment = new UserFragment();
+            } else if (itemId == R.id.map) {
+                fragment = new MapFragment();
+            } else if (itemId == R.id.settings) {
+                fragment = new SettingsFragment();
+            }
 
-
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new MyAdapter(getApplicationContext(), Personas));
-
+            if (fragment != null) {
+                replaceFragment(fragment);
+                return true;
+            } else {
+                return false;
+            }
+        });
     }
 
-    private void replaceFragment(Fragment fragment){
-
+    private void replaceFragment (Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout,fragment);
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
-
     }
+
+
+
 }
