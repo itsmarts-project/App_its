@@ -5,15 +5,11 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 
 import android.os.Bundle;
 
 import com.erick.geoapoyo.databinding.ActivityHomePageBinding;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomePage extends AppCompatActivity {
 
