@@ -1,11 +1,10 @@
 package com.erick.geoapoyo.api;
 
-public class LoginResponse {
-    private String token;
+import com.google.gson.annotations.SerializedName;
 
-    public LoginResponse(String token) {
-        this.token = token;
-    }
+public class LoginResponse {
+    @SerializedName("token")
+    String token;
 
     public String getToken() {
         return token;

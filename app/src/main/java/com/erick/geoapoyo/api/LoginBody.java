@@ -1,10 +1,15 @@
 package com.erick.geoapoyo.api;
 
-public class User {
+import com.google.gson.annotations.SerializedName;
+
+public class LoginBody {
+    @SerializedName("correo")
     private String correo;
+
+    @SerializedName("contrasenia")
     private String contrasenia;
 
-    public User(String correo, String contrasenia) {
+    public LoginBody(String correo, String contrasenia) {
         this.correo = correo;
         this.contrasenia = contrasenia;
     }
@@ -13,12 +18,12 @@ public class User {
         return correo;
     }
 
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
     }
 
     public void setContrasenia(String contrasenia) {

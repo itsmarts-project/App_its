@@ -1,21 +1,20 @@
 package com.erick.geoapoyo;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
-import com.erick.geoapoyo.R;
-import com.erick.geoapoyo.api.ApiInterface;
-import com.erick.geoapoyo.api.LoginResponse;
-import com.erick.geoapoyo.api.RetrofitClient;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.erick.geoapoyo.api.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
     EditText editTextCorreo, editTextContrasenia;
     Button botonIniciarSesion;
+    MainViewModel mViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,41 +26,20 @@ public class MainActivity extends AppCompatActivity {
         editTextContrasenia = findViewById(R.id.contrasenia);
         botonIniciarSesion = findViewById(R.id.boton_iniciar_sesion);
 
-        botonIniciarSesion.setOnClickListener(view -> {
-            // Obtener los valores de correo y contraseña ingresados por el usuario
-            String correo = editTextCorreo.getText().toString().trim();
-            String contrasenia = editTextContrasenia.getText().toString().trim();
+        // Inicializar ViewModel
+        mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
-            // Verificar si los campos no están vacíos
-            if (!correo.isEmpty() && !contrasenia.isEmpty()) {
-                // Realizar la solicitud POST utilizando Retrofit
-                ApiInterface apiInterface = RetrofitClient.getRetrofitInstance().create(ApiInterface.class);
-                Call<LoginResponse> call = apiInterface.getLoginInformation(correo, contrasenia);
-
-                call.enqueue(new Callback<LoginResponse>() {
-                    @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                        if (response.isSuccessful()) {
-                            LoginResponse loginResponse = response.body();
-                            String token = loginResponse.getToken();
-                            // Manejar la respuesta del servidor aquí
-                            Toast.makeText(MainActivity.this, "Token: " + token, Toast.LENGTH_SHORT).show();
-                        } else {
-                            // Manejar el error de respuesta del servidor aquí
-                            Toast.makeText(MainActivity.this, "Error en la solicitud", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-                        // Manejar el fallo de la llamada aquí
-                        Toast.makeText(MainActivity.this, "Error en la conexión", Toast.LENGTH_SHORT).show();
-                    }
-                });
-            } else {
-                // Mostrar mensaje de error si algún campo está vacío
-                Toast.makeText(MainActivity.this, "Por favor, ingrese correo y contraseña", Toast.LENGTH_SHORT).show();
+        // Observar el evento de inicio de sesión exitoso
+        mViewModel.getLoginSuccessEvent().observe(this, loginSuccess -> {
+            if (loginSuccess) {
+                // Iniciar la pantalla de HomePage
+                startActivity(new Intent(MainActivity.this, HomePage.class));
+                finish(); // Opcional: cerrar la actividad actual si ya no es necesaria
             }
+        });
+
+        botonIniciarSesion.setOnClickListener(view -> {
+            mViewModel.login(editTextCorreo.getText().toString(), editTextContrasenia.getText().toString());
         });
     }
 }
