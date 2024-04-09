@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
         // Observar el evento de inicio de sesión exitoso
         mViewModel.getLoginSuccessEvent().observe(this, loginSuccess -> {
             if (loginSuccess) {
+                // Mostrar Toast de inicio de sesión exitoso
+                Toast.makeText(MainActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
                 // Iniciar la pantalla de HomePage
                 startActivity(new Intent(MainActivity.this, HomePage.class));
                 finish(); // Opcional: cerrar la actividad actual si ya no es necesaria
@@ -39,7 +41,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
         botonIniciarSesion.setOnClickListener(view -> {
-            mViewModel.login(editTextCorreo.getText().toString(), editTextContrasenia.getText().toString());
+            // Obtener valores del correo y la contraseña
+            String correo = editTextCorreo.getText().toString().trim();
+            String contrasenia = editTextContrasenia.getText().toString().trim();
+
+            // Verificar si el correo está vacío
+            if (correo.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Ingrese su correo", Toast.LENGTH_SHORT).show();
+                return; // Salir del método para evitar la ejecución adicional
+            }
+
+            // Verificar si la contraseña está vacía
+            if (contrasenia.isEmpty()) {
+                Toast.makeText(MainActivity.this, "Ingrese su contraseña", Toast.LENGTH_SHORT).show();
+                return; // Salir del método para evitar la ejecución adicional
+            }
+
+            // Intentar iniciar sesión
+            mViewModel.login(correo, contrasenia);
         });
     }
 }
+

@@ -6,17 +6,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.erick.geoapoyo.api.LoginBody;
-import com.erick.geoapoyo.api.LoginResponse;
-import com.erick.geoapoyo.api.MainRepository;
-
 public class MainViewModel extends ViewModel {
 
     MutableLiveData<Integer> mProgressMutableData = new MutableLiveData<>();
     MutableLiveData<String> mLoginResultMutableData = new MutableLiveData<>();
     MainRepository mMainRepository;
 
-    // Nuevo MutableLiveData para representar el evento de inicio de sesión exitoso
     private MutableLiveData<Boolean> mLoginSuccessEvent = new MutableLiveData<>();
 
     public MainViewModel(){
@@ -34,7 +29,6 @@ public class MainViewModel extends ViewModel {
                 mProgressMutableData.postValue(View.INVISIBLE);
                 mLoginResultMutableData.postValue("Login Success");
 
-                // Emitir el evento de inicio de sesión exitoso
                 mLoginSuccessEvent.postValue(true);
             }
 
@@ -46,15 +40,10 @@ public class MainViewModel extends ViewModel {
         });
     }
 
-    public LiveData<String> getLoginResult(){
-        return mLoginResultMutableData;
-    }
-
     public LiveData<Integer> getProgress(){
         return mProgressMutableData;
     }
 
-    // Método para obtener el evento de inicio de sesión exitoso
     public LiveData<Boolean> getLoginSuccessEvent() {
         return mLoginSuccessEvent;
     }
