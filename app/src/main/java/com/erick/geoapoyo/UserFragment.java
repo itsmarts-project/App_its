@@ -66,11 +66,12 @@ public class UserFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_user, container, false);
 
         RecyclerView recyclerView = rootView.findViewById(R.id.recycler_personas);
-        List<Persona> personas = new ArrayList<>();
-        personas.add(new Persona("Erick", "Villaseñor", "Jiménez", "UTL", R.drawable.erick));
-
+        List<Solicitante> solicitantes = new ArrayList<>();
+        solicitantes.add(new Solicitante    (1, "Erick", "Villaseñor", "Jiménez", "M", "19","erickvillaseor", R.drawable.erick,"UTL", R.drawable.circle_shape_green));
+        solicitantes.add(new Solicitante    (1, "Erick", "Villaseñor", "Jiménez", "M", "19","erickvillaseor", R.drawable.erick,"UTL", R.drawable.circle_shape_green));
+        //R.drawable.erick
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(new MyAdapter(getActivity().getApplicationContext(), personas));
+        recyclerView.setAdapter(new MyAdapter(getActivity().getApplicationContext(), solicitantes));
 
         return rootView;
     }

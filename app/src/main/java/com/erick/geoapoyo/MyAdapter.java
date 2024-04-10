@@ -12,11 +12,11 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     Context context;
-    List<Persona> Personas;
+    List<Solicitante> solicitantes;
 
-    public MyAdapter(Context context, List<Persona> Personas) {
+    public MyAdapter(Context context, List<Solicitante> solicitantes) {
         this.context = context;
-        this.Personas = Personas;
+        this.solicitantes = solicitantes;
     }
 
     @NonNull
@@ -27,13 +27,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.nombre_person.setText(Personas.get(position).getNombre());
-        holder.universidad_person.setText(Personas.get(position).getUniversidad());
-        holder.image_person.setImageResource(Personas.get(position).getImagen());
+        holder.nombre_person.setText(solicitantes.get(position).getNombre());
+        holder.universidad_person.setText(solicitantes.get(position).getUniversidad());
+        holder.image_person.setImageResource(solicitantes.get(position).getFoto());
+        holder.estatus.setImageResource(solicitantes.get(position).getEstatus());
     }
 
     @Override
     public int getItemCount() {
-        return Personas.size();
+        return solicitantes.size();
     }
 }

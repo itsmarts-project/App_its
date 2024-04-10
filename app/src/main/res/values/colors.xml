@@ -8,4 +8,5 @@
     <color name="verde">#00913f</color>
     <color name="rojo">#FF0000</color>
     <color name="amarillo">#ffff00</color>
+    <color name="transparente">#00FFFFFF</color>
 </resources>
