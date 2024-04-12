@@ -2,7 +2,9 @@ package com.erick.geoapoyo;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,29 +14,33 @@ import java.util.List;
 public class MyAdapter extends RecyclerView.Adapter<MyViewHolder> {
 
     Context context;
-    List<Solicitante> solicitantes;
+    List<UserData> userData;
+    TextView nombre_person;
+    TextView universidad_person;
 
-    public MyAdapter(Context context, List<Solicitante> solicitantes) {
+
+    public MyAdapter(Context context, List<UserData> userData) {
         this.context = context;
-        this.solicitantes = solicitantes;
+        this.userData = userData;
     }
 
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.persona_view, parent, false));
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.persona_view, parent, false);
+        return new MyViewHolder(itemView);
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.nombre_person.setText(solicitantes.get(position).getNombre());
-        holder.universidad_person.setText(solicitantes.get(position).getUniversidad());
-        holder.image_person.setImageResource(solicitantes.get(position).getFoto());
-        holder.estatus.setImageResource(solicitantes.get(position).getEstatus());
+        holder.nombre_person.setText(userData.get(position).getData().getNombre());
+        holder.universidad_person.setText(userData.get(position).getData().getUniversidad());
+
     }
 
     @Override
     public int getItemCount() {
-        return solicitantes.size();
+        return userData.size();
     }
 }

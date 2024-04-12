@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         mViewModel.getLoginSuccessEvent().observe(this, loginSuccess -> {
             if (loginSuccess) {
                 Toast.makeText(MainActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, HomePage.class));
+                startActivity(new Intent(MainActivity.this, Solicitantes.class));
                 finish();
             }
         });
