@@ -68,7 +68,6 @@ public class Solicitantes_pantalla extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Posts>> call, Response<List<Posts>> response) {
                 if(response.isSuccessful() && response.body() != null){
-                    // La API respondió correctamente, ahora registramos la respuesta en el log
                     Log.d("API_Response", "Response: " + response.body().toString());
 
                     postsList.addAll(response.body());
@@ -81,7 +80,6 @@ public class Solicitantes_pantalla extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Posts>> call, Throwable t) {
-                // Hubo un error al hacer la solicitud
                 Toast.makeText(Solicitantes_pantalla.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("API_Request", "Error: " + t.getMessage());
             }
