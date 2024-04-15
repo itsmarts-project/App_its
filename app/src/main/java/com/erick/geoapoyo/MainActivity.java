@@ -2,6 +2,7 @@ package com.erick.geoapoyo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -12,7 +13,7 @@ import com.erick.geoapoyo.api.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
     EditText editTextCorreo, editTextContrasenia;
-    Button botonIniciarSesion;
+    Button botonIniciarSesion, momentaneo;
     MainViewModel mViewModel;
 
     @Override
@@ -24,12 +25,22 @@ public class MainActivity extends AppCompatActivity {
         editTextContrasenia = findViewById(R.id.contrasenia);
         botonIniciarSesion = findViewById(R.id.boton_iniciar_sesion);
 
+        momentaneo = findViewById(R.id.momentaneo);
+
+        momentaneo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Mapa.class);
+                startActivity(intent);
+            }
+        });
+
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
         mViewModel.getLoginSuccessEvent().observe(this, loginSuccess -> {
             if (loginSuccess) {
                 Toast.makeText(MainActivity.this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(MainActivity.this, Solicitantes.class));
+                startActivity(new Intent(MainActivity.this, Solicitantes_pantalla.class));
                 finish();
             }
         });

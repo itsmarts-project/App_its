@@ -7,7 +7,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".Solicitantes">
+        tools:context=".Solicitantes_pantalla">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/top"
@@ -87,7 +87,7 @@
                 app:srcCompat="@drawable/usuario" />
 
             <ImageButton
-                android:id="@+id/boton_mapa"
+                android:id="@+id/boton_mapa_sol"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_marginBottom="15dp"

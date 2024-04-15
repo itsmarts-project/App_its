@@ -13,7 +13,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             tools:context=".Mapa">
 
 
@@ -49,7 +49,8 @@
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="TextSizeCheck" />
 
                 <TextView
                     android:id="@+id/estatus"
@@ -107,7 +108,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
                 <Spinner
-                    android:id="@+id/spinner"
+                    android:id="@+id/estatus_opciones"
                     android:layout_width="155dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="20dp"
@@ -115,7 +116,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/estatus" />
 
                 <Spinner
-                    android:id="@+id/spinner1"
+                    android:id="@+id/razon_opciones"
                     android:layout_width="155dp"
                     android:layout_height="48dp"
                     android:layout_marginEnd="20dp"
@@ -131,26 +132,30 @@
                     android:text="Coordenadas"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spinner" />
+                    app:layout_constraintTop_toBottomOf="@+id/estatus_opciones" />
 
                 <EditText
-                    android:id="@+id/textView11"
+                    android:id="@+id/eje_x"
                     android:layout_width="155dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="20dp"
                     android:background="@color/transparente"
                     android:hint="Eje X"
+                    android:inputType="none"
+                    android:focusable="false"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView10"
                     tools:text="Eje X" />
 
                 <EditText
-                    android:id="@+id/textView12"
+                    android:id="@+id/eje_y"
                     android:layout_width="155dp"
                     android:layout_height="48dp"
                     android:layout_marginEnd="20dp"
                     android:background="@color/transparente"
                     android:hint="Eje Y"
+                    android:inputType="none"
+                    android:focusable="false"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView10"
                     tools:text="Eje Y" />
@@ -164,7 +169,7 @@
                     android:text="Fecha y hora de la visita"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView11" />
+                    app:layout_constraintTop_toBottomOf="@+id/eje_x" />
 
                 <EditText
                     android:id="@+id/editTextDate"
@@ -223,7 +228,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
                 <TextView
-                    android:id="@+id/textView17"
+                    android:id="@+id/url_foto"
                     android:layout_width="160dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
@@ -232,14 +237,15 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
-                <ImageView
+                <ImageButton
                     android:id="@+id/imageViewGallery"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_marginStart="18dp"
                     android:layout_marginTop="-10dp"
                     android:src="@android:drawable/ic_menu_gallery"
-                    app:layout_constraintStart_toEndOf="@+id/textView17"
+                    android:background="@color/transparente"
+                    app:layout_constraintStart_toEndOf="@+id/url_foto"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
                 <ImageButton
@@ -247,21 +253,22 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_marginStart="20dp"
-                    android:layout_marginTop="-20dp"
+                    android:layout_marginTop="-11dp"
+                    android:background="@color/transparente"
                     android:contentDescription="Abrir cámara"
                     android:src="@android:drawable/ic_menu_camera"
                     app:layout_constraintStart_toEndOf="@+id/imageViewGallery"
                     app:layout_constraintTop_toBottomOf="@+id/textView16" />
 
                 <ImageView
-                    android:id="@+id/imageView6"
+                    android:id="@+id/vista_imagen"
                     android:layout_width="340dp"
                     android:layout_height="100dp"
                     android:layout_marginTop="20dp"
                     android:src="@android:drawable/ic_menu_camera"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                    app:layout_constraintTop_toBottomOf="@+id/url_foto" />
 
                 <TextView
                     android:id="@+id/textView18"
@@ -272,7 +279,7 @@
                     android:text="¿El Cliente es el mismo que el solicitante?"
                     android:textSize="15sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/vista_imagen" />
 
                 <Switch
                     android:id="@+id/switch1"
@@ -281,7 +288,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     app:layout_constraintStart_toEndOf="@+id/textView18"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/vista_imagen" />
 
                 <Button
                     android:id="@+id/button2"
