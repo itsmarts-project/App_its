@@ -19,6 +19,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -49,6 +50,7 @@ public class Mapa extends AppCompatActivity {
     private String selectedImagePath;
     private String capturedImagePath;
     private Toolbar toolbar;
+    private ImageButton boton_solicitantes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +77,7 @@ public class Mapa extends AppCompatActivity {
         editTextX = findViewById(R.id.eje_x);
         editTextY = findViewById(R.id.eje_y);
         editTextDate = findViewById(R.id.editTextDate);
+        boton_solicitantes = findViewById(R.id.boton_solicitantes);
 
         Calendar calendar = Calendar.getInstance();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
@@ -95,7 +98,6 @@ public class Mapa extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
         } else {
-            // Puedes llamar a openCamera() aquí
         }
 
         imageViewGallery = findViewById(R.id.imageViewGallery);
@@ -105,6 +107,14 @@ public class Mapa extends AppCompatActivity {
 
         ImageButton imageButtonCamera = findViewById(R.id.imageButtonCamera);
         imageButtonCamera.setOnClickListener(v -> openCamera());
+
+        boton_solicitantes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Mapa.this, Solicitantes_pantalla.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initializeLocationListener() {
@@ -163,13 +173,12 @@ public class Mapa extends AppCompatActivity {
     }
 
     private File createImageFile() {
-        // Crea un archivo de imagen temporal
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         try {
             return File.createTempFile(
-                    "image_", /* prefijo */
-                    ".jpg", /* sufijo */
-                    storageDir /* directorio */
+                    "image_",
+                    ".jpg",
+                    storageDir
             );
         } catch (IOException e) {
             throw new RuntimeException(e);

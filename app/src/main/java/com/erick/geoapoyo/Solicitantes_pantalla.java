@@ -30,7 +30,7 @@ public class Solicitantes_pantalla extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     PostAdapter adapter;
     List<Posts> postsList = new ArrayList<>();
-    ImageButton boton_mapa;
+    ImageButton boton_mapa_sol;
     private Toolbar toolbar;
 
     @Override
@@ -44,16 +44,23 @@ public class Solicitantes_pantalla extends AppCompatActivity {
         adapter = new PostAdapter(postsList);
         recyclerView.setAdapter(adapter);
 
-        boton_mapa = findViewById(R.id.boton_mapa_sol);
+        boton_mapa_sol = findViewById(R.id.boton_mapa_sol);
 
         fetchPosts();
 
-        botonMapa();
 
         toolbar = findViewById(R.id.detail_activity_toolbar);
         setSupportActionBar(toolbar);
 
         toolbar.setTitle(R.string.app_name);
+
+        boton_mapa_sol.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Solicitantes_pantalla.this, Mapa.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void fetchPosts() {
@@ -81,14 +88,5 @@ public class Solicitantes_pantalla extends AppCompatActivity {
         });
     }
 
-    private void botonMapa() {
-        boton_mapa.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Solicitantes_pantalla.this, Mapa.class);
-                startActivity(intent);
-            }
-        });
-    }
 
 }
