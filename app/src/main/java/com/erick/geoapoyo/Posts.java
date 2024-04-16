@@ -23,7 +23,8 @@ public class Posts {
     @SerializedName("domicilios")
     private JsonArray domicilios;
 
-    public Posts(Usuario usuario, JsonArray visitas, List<Solicitante> solicitantes, JsonArray domicilios) {
+    public Posts(int id, Usuario usuario, JsonArray visitas, List<Solicitante> solicitantes, JsonArray domicilios) {
+        this.id = id;
         this.usuario = usuario;
         this.visitas = visitas;
         this.solicitantes = solicitantes;

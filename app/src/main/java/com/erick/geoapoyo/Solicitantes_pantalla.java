@@ -28,7 +28,7 @@ public class Solicitantes_pantalla extends AppCompatActivity {
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     PostAdapter adapter;
-    List<Posts> postsList = new ArrayList<>();
+    List<Solicitante> postsList = new ArrayList<>();
     ImageButton boton_mapa_sol;
     private Toolbar toolbar;
 
@@ -72,24 +72,14 @@ public class Solicitantes_pantalla extends AppCompatActivity {
                     Usuario usuario = posts.getUsuario();
                     Log.i("API_Response", "Usuario: " + usuario.getNombre() + " " + usuario.getPrimerApellido());
 
-                    // Limpiar la lista de posts y agregar el nuevo post
+                    // Limpiar la lista de posts y agregar los nuevos solicitantes
                     postsList.clear();
-                    postsList.add(posts);
+                    postsList.addAll(posts.getSolicitantes());
 
                     // Notificar al adaptador que los datos han cambiado
                     adapter.notifyDataSetChanged();
 
                     // Accede a la lista de solicitantes y procesa cada uno
-
-                    //Log.i("API_Response", "REsponse: " + posts.usuario.get("nombre"));
-
-                    //HACE FOR PARA LOS DATOS
-                    //for(int i=0; i<posts.usuario.size(); i++){
-                    //  Log.e("API_Response", "Usuario: " + posts.usuario.get("nombre"));
-                    //}
-
-                    //Posts posts = new Posts();
-                    //posts.usuarios
                     List<Solicitante> solicitantes = posts.getSolicitantes();
                     for (Solicitante solicitante : solicitantes) {
                         Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido());

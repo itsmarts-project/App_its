@@ -16,10 +16,10 @@ import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
-    private List<Posts> postsList;
+    private List<Solicitante> solicitantesList;
 
-    public PostAdapter(List<Posts> postsList) {
-        this.postsList = postsList;
+    public PostAdapter(List<Solicitante> solicitantesList) {
+        this.solicitantesList = solicitantesList;
     }
 
     @NonNull
@@ -32,22 +32,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Posts posts = postsList.get(position);
-        List<Solicitante> solicitantes = posts.getSolicitantes();
-
-        if (!solicitantes.isEmpty()) {
-            Solicitante solicitante = solicitantes.get(0); // Utilizamos el primer solicitante de la lista
-            holder.nombre_person.setText(solicitante.getNombre() + " " + solicitante.getPrimerApellido() + " " + solicitante.getSegundoApellido());
-            holder.universidad_person.setText(solicitante.getUniversidad());
-        } else {
-            holder.nombre_person.setText("N/A");
-            holder.universidad_person.setText("N/A");
-        }
+        Solicitante solicitante = solicitantesList.get(position);
+        holder.nombre_person.setText(solicitante.getNombre() + " " + solicitante.getPrimerApellido() + " " + solicitante.getSegundoApellido());
+        holder.universidad_person.setText(solicitante.getUniversidad());
     }
 
     @Override
     public int getItemCount() {
-        return postsList.size();
+        return solicitantesList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
