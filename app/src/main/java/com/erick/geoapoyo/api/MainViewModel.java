@@ -8,6 +8,8 @@ import androidx.lifecycle.ViewModel;
 
 public class MainViewModel extends ViewModel {
 
+    private String token;
+
     MutableLiveData<Integer> mProgressMutableData = new MutableLiveData<>();
     MutableLiveData<String> mLoginResultMutableData = new MutableLiveData<>();
     MainRepository mMainRepository;

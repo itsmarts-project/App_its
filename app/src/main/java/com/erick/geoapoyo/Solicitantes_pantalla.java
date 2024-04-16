@@ -24,7 +24,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Solicitantes_pantalla extends AppCompatActivity {
-
+    private String token;
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     PostAdapter adapter;
@@ -63,38 +63,48 @@ public class Solicitantes_pantalla extends AppCompatActivity {
     }
 
     private void fetchPosts() {
-        Posts idBody = new Posts(1);
-        RetrofitClientInstance.getRetrofitClient().getPosts(idBody).enqueue(new Callback<Posts>() {
-            @Override
-            public void onResponse(Call<Posts> call, Response<Posts> response) {
-                if(response.isSuccessful() && response.body() != null) {
-                    Posts posts = response.body();
-                    Usuario usuario = posts.getUsuario();
-                    Log.i("API_Response", "Usuario: " + usuario.getNombre() + " " + usuario.getPrimerApellido());
+        List<Integer> postIds = getPostIds();
 
-                    // Limpiar la lista de posts y agregar los nuevos solicitantes
-                    postsList.clear();
-                    postsList.addAll(posts.getSolicitantes());
+        for (int id : postIds) {
+            Posts idBody = new Posts(id);
+            RetrofitClientInstance.getRetrofitClient(token).getPosts(idBody).enqueue(new Callback<Posts>() {
+                @Override
+                public void onResponse(Call<Posts> call, Response<Posts> response) {
+                    if(response.isSuccessful() && response.body() != null) {
+                        Posts posts = response.body();
+                        Usuario usuario = posts.getUsuario();
+                        Log.i("API_Response", "Usuario: " + usuario.getNombre() + " " + usuario.getPrimerApellido());
 
-                    // Notificar al adaptador que los datos han cambiado
-                    adapter.notifyDataSetChanged();
+                        postsList.addAll(posts.getSolicitantes());
 
-                    // Accede a la lista de solicitantes y procesa cada uno
-                    List<Solicitante> solicitantes = posts.getSolicitantes();
-                    for (Solicitante solicitante : solicitantes) {
-                        Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido());
+                        adapter.notifyDataSetChanged();
+
+                        List<Solicitante> solicitantes = posts.getSolicitantes();
+                        for (Solicitante solicitante : solicitantes) {
+                            Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido());
+                        }
+                    } else {
+                        Log.e("API_Response", "Error: " + response);
                     }
-                } else {
-                    // La API no respondió correctamente
-                    Log.e("API_Response", "Error: " + response);
                 }
-            }
 
-            @Override
-            public void onFailure(Call<Posts> call, Throwable t) {
-                Toast.makeText(Solicitantes_pantalla.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("API_Request", "Error: " + t.getMessage());
-            }
-        });
+                @Override
+                public void onFailure(Call<Posts> call, Throwable t) {
+                    Toast.makeText(Solicitantes_pantalla.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("API_Request", "Error: " + t.getMessage());
+                }
+            });
+        }
     }
+
+    private int maxPostIds = 10;
+
+    private List<Integer> getPostIds() {
+        List<Integer> postIds = new ArrayList<>();
+        for (int i = 1; i <= maxPostIds; i++) {
+            postIds.add(i);
+        }
+        return postIds;
+    }
+
 }

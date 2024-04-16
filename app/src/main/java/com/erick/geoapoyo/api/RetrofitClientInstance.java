@@ -11,20 +11,21 @@ public class RetrofitClientInstance {
     public static Retrofit getInstance(){
         if(retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://10.0.2.2:8080/")
+                    .baseUrl("https://geoapoyosapi-46nub.ondigitalocean.app/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
         return retrofit;
     }
 
-    public static ApiInterface getRetrofitClient(){
+    public static ApiInterface getRetrofitClient(String token) {
         if(retrofit == null){
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://10.0.2.2:8080/")
+                    .baseUrl("https://geoapoyosapi-46nub.ondigitalocean.app/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
+
         return retrofit.create(ApiInterface.class);
     }
 }

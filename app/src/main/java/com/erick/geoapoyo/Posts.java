@@ -18,7 +18,7 @@ public class Posts {
     private JsonArray visitas;
 
     @SerializedName("solicitantes")
-    private List<Solicitante> solicitantes; // Cambio de tipo de JsonArray a List<Solicitante>
+    private List<Solicitante> solicitantes;
 
     @SerializedName("domicilios")
     private JsonArray domicilios;

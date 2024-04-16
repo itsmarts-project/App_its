@@ -5,6 +5,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainRepository {
+    private String token;
 
     public void loginRemote(LoginBody loginBody,  ILoginResponse loginResponse){
         ILoginService loginService = RetrofitClientInstance.getInstance().create(ILoginService.class);
@@ -14,6 +15,8 @@ public class MainRepository {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if(response.isSuccessful()){
+                    token = response.body().getToken();
+                    System.out.println("Token: " + token);
                     loginResponse.onResponse(response.body());
                 } else {
                     loginResponse.onFailure(new Throwable(response.message()));
