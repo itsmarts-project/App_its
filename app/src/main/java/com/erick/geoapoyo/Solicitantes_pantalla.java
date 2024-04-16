@@ -16,6 +16,10 @@ import android.widget.Toast;
 import com.erick.geoapoyo.api.PostAdapter;
 import com.erick.geoapoyo.api.RetrofitClientInstance;
 import com.erick.geoapoyo.databinding.ActivitySolicitantesBinding;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,22 +68,34 @@ public class Solicitantes_pantalla extends AppCompatActivity {
     }
 
     private void fetchPosts() {
-        RetrofitClientInstance.getRetrofitClient().getPosts(1).enqueue(new Callback<List<Posts>>() {
+        Posts idBody = new Posts(1);
+        RetrofitClientInstance.getRetrofitClient().getPosts(idBody).enqueue(new Callback<Posts>() {
             @Override
-            public void onResponse(Call<List<Posts>> call, Response<List<Posts>> response) {
-                if(response.isSuccessful() && response.body() != null){
-                    Log.d("API_Response", "Response: " + response.body().toString());
+            public void onResponse(Call<Posts> call, Response<Posts> response) {
+                if(response.isSuccessful() && response.body() != null) {
+                    Posts posts = response.body();
+                    Log.i("API_Response", "REsponse: " + posts.getUsuario().getNombre() + " " +
+                            posts.getUsuario().getPrimerApellido() + " " + posts.getUsuario().getSegundoApellido());
 
-                    postsList.addAll(response.body());
-                    adapter.notifyDataSetChanged();
+                    //Log.i("API_Response", "REsponse: " + posts.usuario.get("nombre"));
+
+                    //HACE FOR PARA LOS DATOS
+                    //for(int i=0; i<posts.usuario.size(); i++){
+                      //  Log.e("API_Response", "Usuario: " + posts.usuario.get("nombre"));
+                    //}
+
+                    //Posts posts = new Posts();
+                    //posts.usuarios
+                    //postsList.addAll(response.body());
+                   // adapter.notifyDataSetChanged();
                 } else {
                     // La API no respondió correctamente
-                    Log.e("API_Response", "Error: " + response.message());
+                    Log.e("API_Response", "Error: " + response);
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Posts>> call, Throwable t) {
+            public void onFailure(Call<Posts> call, Throwable t) {
                 Toast.makeText(Solicitantes_pantalla.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
                 Log.e("API_Request", "Error: " + t.getMessage());
             }

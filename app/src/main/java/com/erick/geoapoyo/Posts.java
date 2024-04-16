@@ -1,76 +1,98 @@
 package com.erick.geoapoyo;
 
+import com.erick.geoapoyo.models.Domicilios;
+import com.erick.geoapoyo.models.Usuario;
+import com.erick.geoapoyo.models.Visitas;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
 
 public class Posts {
 
-    @SerializedName("nombre")
-    String nombre;
+    @SerializedName("id")
+    private int id;
 
-    @SerializedName("primerApellido")
-    String primerApellido;
+    @SerializedName("usuario")
+    private Usuario usuario;
 
-    @SerializedName("segundoApellido")
-    String segundoApellido;
+    @SerializedName("visitas")
+    private JsonArray visitas;
 
-    @SerializedName("estatus")
-    String estatus;
+    @SerializedName("solicitantes")
+    private JsonArray solicitantes;
 
-    @SerializedName("universidad")
-    String universidad;
+    @SerializedName("domicilios")
+    private JsonArray domicilios;
 
-    @SerializedName("fotoSolicitante")
-    String fotoSolicitante;
 
-    public Posts(String nombre, String primerApellido, String segundoApellido, String estatus, String universidad, String fotoSolicitante) {
-        this.nombre = nombre;
-        this.primerApellido = primerApellido;
-        this.segundoApellido = segundoApellido;
-        this.estatus = estatus;
-        this.universidad = universidad;
-        this.fotoSolicitante = fotoSolicitante;
+    public Posts(Usuario usuario, JsonArray visitas, JsonArray solicitantes, JsonArray domicilios) {
+        this.usuario = usuario;
+        this.visitas = visitas;
+        this.solicitantes = solicitantes;
+        this.domicilios = domicilios;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-    public String getNombre() {
-        return nombre;
+    // Constructor para ID
+    public Posts(int id) {
+        this.id = id;
     }
 
-    public void setPrimerApellido(String primerApellido) {
-        this.primerApellido = primerApellido;
-    }
-    public String getPrimerApellido() {
-        return primerApellido;
+    // Constructor vacío
+    public Posts() {
     }
 
-    public void setSegundoApellido(String segundoApellido) {
-        this.segundoApellido = segundoApellido;
-    }
-    public String getSegundoApellido() {
-        return segundoApellido;
+    // Getters and Setters
+    public int getId() {
+        return id;
     }
 
-    public void setEstatus(String estatus) {
-        this.estatus = estatus;
-    }
-    public String getEstatus() {
-        return estatus;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setUniversidad(String universidad) {
-        this.universidad = universidad;
-    }
-    public String getUniversidad() {
-        return universidad;
+    public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setFotoSolicitante(String fotoSolicitante) {
-        this.fotoSolicitante = fotoSolicitante;
-    }
-    public String getFotoSolicitante() {
-        return fotoSolicitante;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
+    public JsonArray getVisitas() {
+        return visitas;
+    }
+
+    public void setVisitas(JsonArray visitas) {
+        this.visitas = visitas;
+    }
+
+    public JsonArray getSolicitantes() {
+        return solicitantes;
+    }
+
+    public void setSolicitantes(JsonArray solicitantes) {
+        this.solicitantes = solicitantes;
+    }
+
+    public JsonArray getDomicilios() {
+        return domicilios;
+    }
+
+    public void setDomicilios(JsonArray domicilios) {
+        this.domicilios = domicilios;
+    }
+
+
+    @Override
+    public String toString() {
+        return "Posts{" +
+                "id=" + id +
+                ", usuario=" + usuario +
+                ", visitas=" + visitas +
+                ", solicitantes=" + solicitantes +
+                ", domicilios=" + domicilios +
+                '}';
+    }
 }
