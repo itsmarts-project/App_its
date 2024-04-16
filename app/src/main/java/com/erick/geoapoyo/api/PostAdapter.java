@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.erick.geoapoyo.Posts;
 import com.erick.geoapoyo.R;
+import com.erick.geoapoyo.models.Solicitante;
 
 import java.util.List;
 
@@ -31,9 +32,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        Posts posts = postsList.get(position);
+        List<Solicitante> solicitantes = posts.getSolicitantes();
 
-    //holder.nombre_person.setText(postsList.get(position).getNombre());
-    //holder.nombre_person.setText(postsList.get(position).getUniversidad());
+        if (!solicitantes.isEmpty()) {
+            Solicitante solicitante = solicitantes.get(0); // Utilizamos el primer solicitante de la lista
+            holder.nombre_person.setText(solicitante.getNombre() + " " + solicitante.getPrimerApellido() + " " + solicitante.getSegundoApellido());
+            holder.universidad_person.setText(solicitante.getUniversidad());
+        } else {
+            holder.nombre_person.setText("N/A");
+            holder.universidad_person.setText("N/A");
+        }
     }
 
     @Override
@@ -41,8 +50,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return postsList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
-
+    public class ViewHolder extends RecyclerView.ViewHolder {
         TextView nombre_person;
         TextView universidad_person;
 

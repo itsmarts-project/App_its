@@ -25,15 +25,6 @@ public class MainActivity extends AppCompatActivity {
         editTextContrasenia = findViewById(R.id.contrasenia);
         botonIniciarSesion = findViewById(R.id.boton_iniciar_sesion);
 
-        momentaneo = findViewById(R.id.momentaneo);
-
-        momentaneo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Mapa.class);
-                startActivity(intent);
-            }
-        });
 
         mViewModel = new ViewModelProvider(this).get(MainViewModel.class);
 

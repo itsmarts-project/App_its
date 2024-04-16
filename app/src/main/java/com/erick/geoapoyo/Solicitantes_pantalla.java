@@ -68,15 +68,18 @@ public class Solicitantes_pantalla extends AppCompatActivity {
             @Override
             public void onResponse(Call<Posts> call, Response<Posts> response) {
                 if(response.isSuccessful() && response.body() != null) {
-                    Posts posts = response.body(); // Crear una instancia de Posts con la respuesta
+                    Posts posts = response.body();
                     Usuario usuario = posts.getUsuario();
                     Log.i("API_Response", "Usuario: " + usuario.getNombre() + " " + usuario.getPrimerApellido());
 
+                    // Limpiar la lista de posts y agregar el nuevo post
+                    postsList.clear();
+                    postsList.add(posts);
+
+                    // Notificar al adaptador que los datos han cambiado
+                    adapter.notifyDataSetChanged();
+
                     // Accede a la lista de solicitantes y procesa cada uno
-                    List<Solicitante> solicitantes = posts.getSolicitantes();
-                    for (Solicitante solicitante : solicitantes) {
-                        Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido());
-                    }
 
                     //Log.i("API_Response", "REsponse: " + posts.usuario.get("nombre"));
 
@@ -87,7 +90,10 @@ public class Solicitantes_pantalla extends AppCompatActivity {
 
                     //Posts posts = new Posts();
                     //posts.usuarios
-
+                    List<Solicitante> solicitantes = posts.getSolicitantes();
+                    for (Solicitante solicitante : solicitantes) {
+                        Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido());
+                    }
                 } else {
                     // La API no respondió correctamente
                     Log.e("API_Response", "Error: " + response);
