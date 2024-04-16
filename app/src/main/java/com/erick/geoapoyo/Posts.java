@@ -1,13 +1,10 @@
 package com.erick.geoapoyo;
 
-import com.erick.geoapoyo.models.Domicilios;
+import com.erick.geoapoyo.models.Solicitante;
 import com.erick.geoapoyo.models.Usuario;
-import com.erick.geoapoyo.models.Visitas;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class Posts {
 
@@ -21,13 +18,12 @@ public class Posts {
     private JsonArray visitas;
 
     @SerializedName("solicitantes")
-    private JsonArray solicitantes;
+    private List<Solicitante> solicitantes; // Cambio de tipo de JsonArray a List<Solicitante>
 
     @SerializedName("domicilios")
     private JsonArray domicilios;
 
-
-    public Posts(Usuario usuario, JsonArray visitas, JsonArray solicitantes, JsonArray domicilios) {
+    public Posts(Usuario usuario, JsonArray visitas, List<Solicitante> solicitantes, JsonArray domicilios) {
         this.usuario = usuario;
         this.visitas = visitas;
         this.solicitantes = solicitantes;
@@ -68,11 +64,11 @@ public class Posts {
         this.visitas = visitas;
     }
 
-    public JsonArray getSolicitantes() {
+    public List<Solicitante> getSolicitantes() {
         return solicitantes;
     }
 
-    public void setSolicitantes(JsonArray solicitantes) {
+    public void setSolicitantes(List<Solicitante> solicitantes) {
         this.solicitantes = solicitantes;
     }
 
@@ -83,7 +79,6 @@ public class Posts {
     public void setDomicilios(JsonArray domicilios) {
         this.domicilios = domicilios;
     }
-
 
     @Override
     public String toString() {

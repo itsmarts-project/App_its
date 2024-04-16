@@ -4,22 +4,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.erick.geoapoyo.api.PostAdapter;
 import com.erick.geoapoyo.api.RetrofitClientInstance;
-import com.erick.geoapoyo.databinding.ActivitySolicitantesBinding;
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-
-import org.json.JSONArray;
+import com.erick.geoapoyo.models.Solicitante;
+import com.erick.geoapoyo.Posts;
+import com.erick.geoapoyo.models.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -73,21 +68,26 @@ public class Solicitantes_pantalla extends AppCompatActivity {
             @Override
             public void onResponse(Call<Posts> call, Response<Posts> response) {
                 if(response.isSuccessful() && response.body() != null) {
-                    Posts posts = response.body();
-                    Log.i("API_Response", "REsponse: " + posts.getUsuario().getNombre() + " " +
-                            posts.getUsuario().getPrimerApellido() + " " + posts.getUsuario().getSegundoApellido());
+                    Posts posts = response.body(); // Crear una instancia de Posts con la respuesta
+                    Usuario usuario = posts.getUsuario();
+                    Log.i("API_Response", "Usuario: " + usuario.getNombre() + " " + usuario.getPrimerApellido());
+
+                    // Accede a la lista de solicitantes y procesa cada uno
+                    List<Solicitante> solicitantes = posts.getSolicitantes();
+                    for (Solicitante solicitante : solicitantes) {
+                        Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido());
+                    }
 
                     //Log.i("API_Response", "REsponse: " + posts.usuario.get("nombre"));
 
                     //HACE FOR PARA LOS DATOS
                     //for(int i=0; i<posts.usuario.size(); i++){
-                      //  Log.e("API_Response", "Usuario: " + posts.usuario.get("nombre"));
+                    //  Log.e("API_Response", "Usuario: " + posts.usuario.get("nombre"));
                     //}
 
                     //Posts posts = new Posts();
                     //posts.usuarios
-                    //postsList.addAll(response.body());
-                   // adapter.notifyDataSetChanged();
+
                 } else {
                     // La API no respondió correctamente
                     Log.e("API_Response", "Error: " + response);
@@ -101,6 +101,4 @@ public class Solicitantes_pantalla extends AppCompatActivity {
             }
         });
     }
-
-
 }

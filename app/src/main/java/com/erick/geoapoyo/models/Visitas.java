@@ -3,7 +3,6 @@ package com.erick.geoapoyo.models;
 import java.util.List;
 
 public class Visitas {
-    private List<Visitas> visitas; // Cambiando a una lista de objetos Visitas
 
     String idVisita;
     String confirmacionSolicitante;
@@ -141,14 +140,6 @@ public class Visitas {
 
     public void setUsuario_idUsuario(String usuario_idUsuario) {
         this.usuario_idUsuario = usuario_idUsuario;
-    }
-
-    public List<Visitas> getVisitas() {
-        return visitas;
-    }
-
-    public void setVisitas(List<Visitas> visitas) {
-        this.visitas = visitas;
     }
 }
 
