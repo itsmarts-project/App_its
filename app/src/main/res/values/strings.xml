@@ -5,6 +5,8 @@
     <string-array name="opciones_estatus">
         <item>Encontrado</item>
         <item>No encontrado</item>
+        <item>Rechazada la visita</item>
+        <item>Abandonada la visita</item>
     </string-array>
 
     <string-array name="razon_opciones">

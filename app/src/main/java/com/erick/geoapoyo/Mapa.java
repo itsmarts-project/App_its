@@ -29,6 +29,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.erick.geoapoyo.models.Solicitante;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -37,6 +39,7 @@ import java.util.Locale;
 
 public class Mapa extends AppCompatActivity {
 
+    public Solicitante solicitante;
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private static final int REQUEST_IMAGE_CAPTURE = 2;
     private static final int REQUEST_GALLERY_PERMISSION = 3;
@@ -52,6 +55,11 @@ public class Mapa extends AppCompatActivity {
     private Toolbar toolbar;
     private ImageButton boton_solicitantes, boton_settings;
     private ImageView cerrar_sesion;
+    TextView nombre, universidad;
+
+    public void setSolicitante(Solicitante solicitante) {
+        this.solicitante = solicitante;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,6 +154,15 @@ public class Mapa extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Solicitante solicitante = (Solicitante) getIntent().getSerializableExtra("solicitante");
+        setSolicitante(solicitante);
+
+        nombre = findViewById(R.id.map_nombre);
+        universidad = findViewById(R.id.map_universidad);
+
+        nombre.setText(solicitante.getNombre() + " " + solicitante.getPrimerApellido() + " " + solicitante.getSegundoApellido());
+        universidad.setText(solicitante.getUniversidad());
     }
 
     private void initializeLocationListener() {

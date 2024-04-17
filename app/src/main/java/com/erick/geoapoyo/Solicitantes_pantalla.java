@@ -34,6 +34,7 @@ public class Solicitantes_pantalla extends AppCompatActivity {
     ImageView cerrar_sesion;
     private Toolbar toolbar;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +82,16 @@ public class Solicitantes_pantalla extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        adapter.setOnItemClickListener(new PostAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Solicitante solicitante) {
+                Intent intent = new Intent(Solicitantes_pantalla.this, Mapa.class);
+                intent.putExtra("solicitante", solicitante);
+                startActivity(intent);
+            }
+        });
+        recyclerView.setAdapter(adapter);
     }
 
     private void fetchPosts() {
@@ -91,10 +102,10 @@ public class Solicitantes_pantalla extends AppCompatActivity {
             LoginBody login = new LoginBody();
             //  token = login.getToken();
 
-            RetrofitClientInstance.getRetrofitClient(token).getPosts (idBody, token).enqueue(new Callback<Posts>() {
+            RetrofitClientInstance.getRetrofitClient(token).getPosts(idBody, token).enqueue(new Callback<Posts>() {
                 @Override
                 public void onResponse(Call<Posts> call, Response<Posts> response) {
-                    if(response.isSuccessful() && response.body() != null) {
+                    if (response.isSuccessful() && response.body() != null) {
                         Posts posts = response.body();
                         Usuario usuario = posts.getUsuario();
                         Log.i("API_Response", "Usuario: " + usuario.getNombre() + " " + usuario.getPrimerApellido());
@@ -105,7 +116,7 @@ public class Solicitantes_pantalla extends AppCompatActivity {
 
                         List<Solicitante> solicitantes = posts.getSolicitantes();
                         for (Solicitante solicitante : solicitantes) {
-                            Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido());
+                            Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido() + ", Estatus: " + solicitante.getEstatus());
                         }
                     } else {
                         Log.e("API_Response", "Error1: " + response);

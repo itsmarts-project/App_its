@@ -15,7 +15,7 @@ import com.erick.geoapoyo.models.Solicitante;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
-
+    private OnItemClickListener onItemClickListener;
     private List<Solicitante> solicitantesList;
 
     public PostAdapter(List<Solicitante> solicitantesList) {
@@ -35,6 +35,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         Solicitante solicitante = solicitantesList.get(position);
         holder.nombre_person.setText(solicitante.getNombre() + " " + solicitante.getPrimerApellido() + " " + solicitante.getSegundoApellido());
         holder.universidad_person.setText(solicitante.getUniversidad());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemClickListener != null) {
+                    onItemClickListener.onItemClick(solicitante);
+                }
+            }
+        });
     }
 
     @Override
@@ -52,5 +61,13 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             nombre_person = itemView.findViewById(R.id.nombre_person);
             universidad_person = itemView.findViewById(R.id.universidad_person);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Solicitante solicitante);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.onItemClickListener = listener;
     }
 }
