@@ -10,21 +10,21 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.erick.geoapoyo.api.LoginBody;
 import com.erick.geoapoyo.api.PostAdapter;
 import com.erick.geoapoyo.api.RetrofitClientInstance;
 import com.erick.geoapoyo.models.Solicitante;
-import com.erick.geoapoyo.Posts;
 import com.erick.geoapoyo.models.Usuario;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Solicitantes_pantalla extends AppCompatActivity {
-    private String token;
+
+    private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTcxMzMxMzQ0MywiZXhwIjoxNzEzNTcyNjQzfQ.CRX8gJj3RbjBs2hzV23EF57LPSPgYEOEmWsPScbRG2A";
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     PostAdapter adapter;
@@ -67,7 +67,10 @@ public class Solicitantes_pantalla extends AppCompatActivity {
 
         for (int id : postIds) {
             Posts idBody = new Posts(id);
-            RetrofitClientInstance.getRetrofitClient(token).getPosts(idBody).enqueue(new Callback<Posts>() {
+            LoginBody login = new LoginBody();
+            //  token = login.getToken();
+
+            RetrofitClientInstance.getRetrofitClient(token).getPosts (idBody, token).enqueue(new Callback<Posts>() {
                 @Override
                 public void onResponse(Call<Posts> call, Response<Posts> response) {
                     if(response.isSuccessful() && response.body() != null) {
@@ -84,14 +87,14 @@ public class Solicitantes_pantalla extends AppCompatActivity {
                             Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido());
                         }
                     } else {
-                        Log.e("API_Response", "Error: " + response);
+                        Log.e("API_Response", "Error1: " + response);
                     }
                 }
 
                 @Override
                 public void onFailure(Call<Posts> call, Throwable t) {
                     Toast.makeText(Solicitantes_pantalla.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.e("API_Request", "Error: " + t.getMessage());
+                    Log.e("API_Request", "Error2: " + t.getMessage());
                 }
             });
         }

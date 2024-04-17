@@ -31,7 +31,6 @@ public class Posts {
         this.domicilios = domicilios;
     }
 
-    // Constructor para ID
     public Posts(int id) {
         this.id = id;
     }
@@ -40,7 +39,6 @@ public class Posts {
     public Posts() {
     }
 
-    // Getters and Setters
     public int getId() {
         return id;
     }

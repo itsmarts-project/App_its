@@ -9,9 +9,23 @@ public class LoginBody {
     @SerializedName("contrasenia")
     private String contrasenia;
 
+    public String token;
+
     public LoginBody(String correo, String contrasenia) {
         this.correo = correo;
         this.contrasenia = contrasenia;
+    }
+
+    public LoginBody() {
+
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getCorreo() {

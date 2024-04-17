@@ -17,6 +17,8 @@ public class MainRepository {
                 if(response.isSuccessful()){
                     token = response.body().getToken();
                     System.out.println("Token: " + token);
+                    LoginBody login = new LoginBody();
+                    login.setToken(token);
                     loginResponse.onResponse(response.body());
                 } else {
                     loginResponse.onFailure(new Throwable(response.message()));
