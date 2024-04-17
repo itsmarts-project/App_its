@@ -15,8 +15,11 @@ import android.widget.Toast;
 import com.erick.geoapoyo.api.LoginBody;
 import com.erick.geoapoyo.api.PostAdapter;
 import com.erick.geoapoyo.api.RetrofitClientInstance;
+import com.erick.geoapoyo.models.Domicilios;
 import com.erick.geoapoyo.models.Solicitante;
 import com.erick.geoapoyo.models.Usuario;
+import com.erick.geoapoyo.models.Visitas;
+
 import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
@@ -117,6 +120,16 @@ public class Solicitantes_pantalla extends AppCompatActivity {
                         List<Solicitante> solicitantes = posts.getSolicitantes();
                         for (Solicitante solicitante : solicitantes) {
                             Log.i("API_Response", "Solicitante: " + solicitante.getNombre() + " " + solicitante.getPrimerApellido() + ", Estatus: " + solicitante.getEstatus());
+                        }
+
+                        List<Visitas> visitas = posts.getVisitas();
+                        for (Visitas visita : visitas) {
+                            Log.i("API_Response", "Visita: " + visita.getFecha() + ", Hora: " + visita.getHora() + ", Visitador: " + visita.getEstatus());
+                        }
+
+                        List<Domicilios> domicilios = posts.getDomicilios();
+                        for (Domicilios domicilio : domicilios) {
+                            Log.i("API_Response", "Domicilio: Calle " + domicilio.getCalle() + ", Número: " + domicilio.getNumeroInterior() + ", Colonia: " + domicilio.getColonia());
                         }
                     } else {
                         Log.e("API_Response", "Error1: " + response);

@@ -1,7 +1,9 @@
 package com.erick.geoapoyo;
 
+import com.erick.geoapoyo.models.Domicilios;
 import com.erick.geoapoyo.models.Solicitante;
 import com.erick.geoapoyo.models.Usuario;
+import com.erick.geoapoyo.models.Visitas;
 import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
@@ -15,15 +17,15 @@ public class Posts {
     private Usuario usuario;
 
     @SerializedName("visitas")
-    private JsonArray visitas;
+    private List<Visitas> visitas;
 
     @SerializedName("solicitantes")
     private List<Solicitante> solicitantes;
 
     @SerializedName("domicilios")
-    private JsonArray domicilios;
+    private List<Domicilios> domicilios;
 
-    public Posts(int id, Usuario usuario, JsonArray visitas, List<Solicitante> solicitantes, JsonArray domicilios) {
+    public Posts(int id, Usuario usuario, List<Visitas> visitas, List<Solicitante> solicitantes, List<Domicilios> domicilios) {
         this.id = id;
         this.usuario = usuario;
         this.visitas = visitas;
@@ -55,11 +57,11 @@ public class Posts {
         this.usuario = usuario;
     }
 
-    public JsonArray getVisitas() {
+    public List<Visitas> getVisitas() {
         return visitas;
     }
 
-    public void setVisitas(JsonArray visitas) {
+    public void setVisitas(List<Visitas> visitas) {
         this.visitas = visitas;
     }
 
@@ -71,11 +73,11 @@ public class Posts {
         this.solicitantes = solicitantes;
     }
 
-    public JsonArray getDomicilios() {
+    public List<Domicilios> getDomicilios() {
         return domicilios;
     }
 
-    public void setDomicilios(JsonArray domicilios) {
+    public void setDomicilios(List<Domicilios> domicilios) {
         this.domicilios = domicilios;
     }
 
