@@ -50,12 +50,34 @@ public class Mapa extends AppCompatActivity {
     private String selectedImagePath;
     private String capturedImagePath;
     private Toolbar toolbar;
-    private ImageButton boton_solicitantes;
+    private ImageButton boton_solicitantes, boton_settings;
+    private ImageView cerrar_sesion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mapa);
+
+        cerrar_sesion = findViewById(R.id.salir);
+        boton_settings = findViewById(R.id.boton_ajustes);
+
+        boton_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Mapa.this, Settings.class);
+                startActivity(intent);
+            }
+        });
+
+        cerrar_sesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Mapa.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+            }
+        });
+
 
         Spinner spinner = findViewById(R.id.estatus_opciones);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -112,6 +134,15 @@ public class Mapa extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Mapa.this, Solicitantes_pantalla.class);
+                startActivity(intent);
+            }
+        });
+
+        cerrar_sesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Mapa.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });

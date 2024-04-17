@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.erick.geoapoyo.api.LoginBody;
@@ -29,7 +30,8 @@ public class Solicitantes_pantalla extends AppCompatActivity {
     LinearLayoutManager layoutManager;
     PostAdapter adapter;
     List<Solicitante> postsList = new ArrayList<>();
-    ImageButton boton_mapa_sol;
+    ImageButton boton_mapa_sol, boton_ajustes;
+    ImageView cerrar_sesion;
     private Toolbar toolbar;
 
     @Override
@@ -44,8 +46,18 @@ public class Solicitantes_pantalla extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         boton_mapa_sol = findViewById(R.id.boton_mapa_sol);
+        cerrar_sesion = findViewById(R.id.salir);
 
         fetchPosts();
+        boton_ajustes = findViewById(R.id.boton_ajustes);
+
+        boton_ajustes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Solicitantes_pantalla.this, Settings.class);
+                startActivity(intent);
+            }
+        });
 
 
         toolbar = findViewById(R.id.detail_activity_toolbar);
@@ -57,6 +69,15 @@ public class Solicitantes_pantalla extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Solicitantes_pantalla.this, Mapa.class);
+                startActivity(intent);
+            }
+        });
+
+        cerrar_sesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Solicitantes_pantalla.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
