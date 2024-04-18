@@ -1,7 +1,6 @@
 package com.erick.geoapoyo;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,8 +19,8 @@ public class Settings extends AppCompatActivity {
 
         usuarios = findViewById(R.id.boton_solicitantes);
         mapa = findViewById(R.id.boton_mapa);
-
         cerrar_sesion = findViewById(R.id.salir);
+
         cerrar_sesion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

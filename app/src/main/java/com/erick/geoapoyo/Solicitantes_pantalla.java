@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.erick.geoapoyo.models.Visitas;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,14 +31,13 @@ import retrofit2.Response;
 public class Solicitantes_pantalla extends AppCompatActivity {
 
     private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTcxMzMxMzQ0MywiZXhwIjoxNzEzNTcyNjQzfQ.CRX8gJj3RbjBs2hzV23EF57LPSPgYEOEmWsPScbRG2A";
-    RecyclerView recyclerView;
-    LinearLayoutManager layoutManager;
-    PostAdapter adapter;
-    List<Solicitante> postsList = new ArrayList<>();
-    ImageButton boton_mapa_sol, boton_ajustes;
-    ImageView cerrar_sesion;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager layoutManager;
+    private PostAdapter adapter;
+    private List<Solicitante> postsList = new ArrayList<>();
+    private ImageButton boton_mapa_sol, boton_ajustes;
+    private ImageView cerrar_sesion;
     private Toolbar toolbar;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,9 +52,9 @@ public class Solicitantes_pantalla extends AppCompatActivity {
 
         boton_mapa_sol = findViewById(R.id.boton_mapa_sol);
         cerrar_sesion = findViewById(R.id.salir);
+        boton_ajustes = findViewById(R.id.boton_ajustes);
 
         fetchPosts();
-        boton_ajustes = findViewById(R.id.boton_ajustes);
 
         boton_ajustes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,10 +64,8 @@ public class Solicitantes_pantalla extends AppCompatActivity {
             }
         });
 
-
         toolbar = findViewById(R.id.detail_activity_toolbar);
         setSupportActionBar(toolbar);
-
         toolbar.setTitle(R.string.app_name);
 
         boton_mapa_sol.setOnClickListener(new View.OnClickListener() {
@@ -94,7 +93,6 @@ public class Solicitantes_pantalla extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        recyclerView.setAdapter(adapter);
     }
 
     private void fetchPosts() {
@@ -154,5 +152,4 @@ public class Solicitantes_pantalla extends AppCompatActivity {
         }
         return postIds;
     }
-
 }

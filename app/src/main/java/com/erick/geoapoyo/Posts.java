@@ -4,8 +4,8 @@ import com.erick.geoapoyo.models.Domicilios;
 import com.erick.geoapoyo.models.Solicitante;
 import com.erick.geoapoyo.models.Usuario;
 import com.erick.geoapoyo.models.Visitas;
-import com.google.gson.JsonArray;
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public class Posts {
@@ -25,6 +25,9 @@ public class Posts {
     @SerializedName("domicilios")
     private List<Domicilios> domicilios;
 
+    public Posts() {
+    }
+
     public Posts(int id, Usuario usuario, List<Visitas> visitas, List<Solicitante> solicitantes, List<Domicilios> domicilios) {
         this.id = id;
         this.usuario = usuario;
@@ -35,10 +38,6 @@ public class Posts {
 
     public Posts(int id) {
         this.id = id;
-    }
-
-    // Constructor vacío
-    public Posts() {
     }
 
     public int getId() {

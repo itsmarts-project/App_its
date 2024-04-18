@@ -26,7 +26,6 @@ public class RetrofitClientInstance {
                     .baseUrl("https://geoapoyosapi-46nub.ondigitalocean.app/")
                     .addConverterFactory(GsonConverterFactory.create());
 
-            // Agrego el token a la instancia de Retrofit
             retrofit = builder.client(new OkHttpClient.Builder()
                             .addInterceptor(chain -> {
                                 Request original = chain.request();

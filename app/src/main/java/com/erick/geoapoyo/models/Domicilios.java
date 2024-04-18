@@ -1,6 +1,8 @@
 package com.erick.geoapoyo.models;
 
-public class Domicilios {
+import java.io.Serializable;
+
+public class Domicilios implements Serializable {
     String idDomicilio;
     String calle;
     String numeroExterior;

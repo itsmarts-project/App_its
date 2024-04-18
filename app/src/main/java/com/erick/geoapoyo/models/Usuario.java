@@ -1,6 +1,8 @@
 package com.erick.geoapoyo.models;
 
-public class Usuario {
+import java.io.Serializable;
+
+public class Usuario implements Serializable {
     String idUsuario;
     String nombre;
     String primerApellido;
