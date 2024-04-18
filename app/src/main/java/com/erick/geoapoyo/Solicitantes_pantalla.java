@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,7 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.erick.geoapoyo.api.LoginBody;
+import com.erick.geoapoyo.api.LoginResponse;
 import com.erick.geoapoyo.api.PostAdapter;
 import com.erick.geoapoyo.api.RetrofitClientInstance;
 import com.erick.geoapoyo.models.Domicilios;
@@ -28,7 +29,7 @@ import retrofit2.Response;
 
 public class Solicitantes_pantalla extends AppCompatActivity {
 
-    private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTcxMzMxMzQ0MywiZXhwIjoxNzEzNTcyNjQzfQ.CRX8gJj3RbjBs2hzV23EF57LPSPgYEOEmWsPScbRG2A";
+    //private String token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsImlhdCI6MTcxMzMxMzQ0MywiZXhwIjoxNzEzNTcyNjQzfQ.CRX8gJj3RbjBs2hzV23EF57LPSPgYEOEmWsPScbRG2A";
     RecyclerView recyclerView;
     LinearLayoutManager layoutManager;
     PostAdapter adapter;
@@ -36,6 +37,8 @@ public class Solicitantes_pantalla extends AppCompatActivity {
     ImageButton boton_mapa_sol, boton_ajustes;
     ImageView cerrar_sesion;
     private Toolbar toolbar;
+    private String token = "";
+    private SharedPreferences sharedPreferences;
 
 
     @Override
@@ -102,8 +105,9 @@ public class Solicitantes_pantalla extends AppCompatActivity {
 
         for (int id : postIds) {
             Posts idBody = new Posts(id);
-            LoginBody login = new LoginBody();
-            //  token = login.getToken();
+            LoginResponse login = new LoginResponse();
+            token = recibirToken();
+            Log.i("API_Response", "Token1: "+ token);
 
             RetrofitClientInstance.getRetrofitClient(token).getPosts(idBody, token).enqueue(new Callback<Posts>() {
                 @Override
@@ -155,4 +159,8 @@ public class Solicitantes_pantalla extends AppCompatActivity {
         return postIds;
     }
 
+    public String recibirToken(){
+        token = sharedPreferences.getString("token", "");
+        return token;
+    }
 }
